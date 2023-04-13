@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You!! Nariya Blanche</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/cake.css">
+    <script src="vendor/confetti/confetti.js"></script>
+</head>
+
+<body>
+    <div id="today">
+        <img src="assets/halo-nariya.png" alt="halo-nariya" srcset="" class="mt-5 image-today">
+        <span></span>
+    </div>
+    <div id="cake" style="display: none;">
+        <div class="cake">
+            <div class="plate"></div>
+            <div class="layer layer-bottom"></div>
+            <div class="layer layer-middle"></div>
+            <div class="layer layer-top"></div>
+            <div class="icing"></div>
+            <div class="drip drip1"></div>
+            <div class="drip drip2"></div>
+            <div class="drip drip3"></div>
+            <div class="candle" onclick="blow()">
+                <div class="flame"></div>
+            </div>
+        </div>
+        <h1>Make a wish..<br />.. dan tekan lilin untuk matikan lilin</h1>
+    </div>
+    <div id="present" class="container">
+        <div id="alerts" class="alert alert-primary fixed-alert mt-3" style="width:50vw" role="alert">
+            alert
+        </div>
+        <div class="card fixed-center-card w-50">
+            <div class="card-body">
+                <div class="row flex-column align-items-center">
+                    <div class="fs-4 col text-center">
+                        Aku ada sesuatu nich, nari mau gk?
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col text-center mt-1">
+                            <a href="#" class="fs-5 btn btn-success btn-sm btn-width" id="yes" onclick="yes()">Mau</a>
+                        </div>
+                        <div class="col text-center mt-1">
+                            <a href="#" class="fs-5 btn btn-danger btn-sm btn-width" id="no" onclick="no()">Gk usah</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="greeting" class="container navbar fixed-top">
+        <div class="d-flex flex-column justify-content-center align-items-center">
+            <span class="text-white text-center happy">Happy</span>
+            <span class="text-white text-center birth">Birthday</span>
+            <span class="text-white text-center ke">ke (isi sendiri)</span>
+            <span class="text-white text-center orang">Nariya Blanche</span>
+            <br><br><br>
+            <span class="text-white text-center lyric mt-5 pt-3">Aku gak jago gambar atau bikin kata-kata</span>
+            <span class="text-white text-center lyric">Aku cuma bisa bilang</span>
+            <span class="text-white text-center lyric">"Selamat ulang tahun Nari"</span>
+            <span class="text-white text-center lyric">Semoga semakin sukses dan lancar rejekinya</span>
+            <span class="text-white text-center lyric">Semoga lancar semua kerjaan dan kegiatan yang nari lakukan</span>
+            <span class="text-white text-center lyric">Semangat terus ya, aku selalu mendukungmu</span>
+            <span class="text-white text-center lyric"><strong>-Nicky Erlangga-</strong></span>
+        </div>
+    </div>
+    <div class="navbar fixed-bottom">
+        <div class="container justify-content-center">
+            <div class="row">
+                <div class="col">
+                    <button class="btn mb-5" style="background-color: #B587D9;color: white;" id="turn-on" onclick="showCandle()">Turn on light</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var i = 0;
+        var j = 0;
+        function yes() {
+            var yes = $("#yes")
+            var no = $("#no")
+            if (yes.text() == "Mau") {
+                $("#yes").text("Gk usah")
+                $("#no").text("Mau")
+                $("#yes").removeClass("btn-success")
+                $("#no").removeClass("btn-danger")
+                $("#yes").addClass("btn-danger")
+                $("#no").addClass("btn-success")
+                yes.attr("onclick", "no();")
+                no.attr("onclick", "yes();")
+            } else {
+                $("#no").text("Gk usah")
+                $("#yes").text("Mau")
+                $("#no").removeClass("btn-success")
+                $("#yes").removeClass("btn-danger")
+                $("#no").addClass("btn-danger")
+                $("#yes").addClass("btn-success")
+                yes.attr("onclick", "yes();")
+                no.attr("onclick", "no();")
+            }
+            j++;
+            if (j == 5) {
+                $('#alerts').text("Hadiahnya didepan mata.. LETS GOOOO")
+                $('#alerts').fadeIn("slow")
+                $('#alerts').delay(500).fadeOut("slow")
+            }
+            if (j == 8) {
+                $("#present").delay(500).fadeOut('slow');
+                $("#greeting").delay(1000).fadeIn('slow');
+                $("body").load(startConfetti())
+            }
+        }
+        function no() {
+            if (i == 0) {
+                $('#alerts').text("Kok gk mau?")
+                $('#alerts').fadeIn("slow")
+                $('#alerts').delay(500).fadeOut("slow")
+                i++;
+            } else if (i == 1) {
+                $('#alerts').text("Ihh kok gk mau sih?")
+                $('#alerts').fadeIn("slow")
+                $('#alerts').delay(500).fadeOut("slow")
+                i++;
+            } else {
+                $('#alerts').text("Yaudah kukasih ke orang lain aja")
+                $('#alerts').fadeIn("slow")
+                $('#alerts').delay(500).fadeOut("slow")
+            }
+        }
+        function showCandle() {
+            $("#turn-on").fadeOut('slow');
+            $("body").addClass("light");
+            $("#today").delay(1000).fadeIn('slow');
+            $("#cake").delay(1000).fadeIn('slow');
+
+        }
+        function blow() {
+            $('.flame').removeClass('flame')
+            $("#today").delay(2000).fadeOut('slow');
+            $("h1").hide().html("Semoga terwujud..").delay(750).fadeIn(300);
+            $("#greeting").delay(2000).fadeOut('slow');
+            $("#cake").delay(2000).fadeOut('slow');
+            $("h1").delay(1000).fadeOut('slow');
+            $("#present").delay(3000).fadeIn("slow")
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</body>
+
+</html>
